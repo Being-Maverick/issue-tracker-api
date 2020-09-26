@@ -5,7 +5,7 @@ const { installHandler } = require('./api_handler.js');
 const cookieParser = require('cookie-parser');
 const routes = require('./auth.js');
 
-const port = process.env.API_SERVER_PORT || 3000;
+const port = process.env.PORT || 3000;
 
 const app = express();
 app.use(cookieParser());
