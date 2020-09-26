@@ -1,0 +1,84 @@
+scalar GraphQlDate
+
+enum StatusType {
+    New 
+    Assigned
+    Fixed
+    Closed
+}
+
+input IssueInputs {
+    title:  String!
+    status:  StatusType = New
+    owner: String
+    effort: Int
+    due: GraphQlDate
+    description: String
+}
+
+input IssueUpdateInputs{
+    title: String
+    status: StatusType
+    owner: String
+    effort: Int
+    due: GraphQlDate
+    description: String
+}
+
+type Issue {
+    _id: ID!
+    id: Int!
+    title: String!
+    status: StatusType!
+    owner: String
+    effort: Int
+    created: GraphQlDate!
+    due: GraphQlDate
+    description: String
+}
+
+type IssueCounts{
+    owner: String!
+    New: Int
+    Assigned: Int
+    Fixed: Int
+    Closed: Int
+}
+
+type IssueListWithPages {
+    issues: [Issue!]!
+    pages: Int
+}
+
+type User{
+    signedIn: Boolean!
+    givenName: String
+    name: String
+    email: String
+}
+
+type Query{
+    about: String!
+    user: User!
+    issueList(
+        status: StatusType
+        effortMin: Int 
+        effortMax: Int
+        page: Int = 1
+        search: String
+    ): IssueListWithPages
+    issue(id: Int!): Issue!
+    issueCounts(
+        status: StatusType
+        effortMin: Int
+        effortMax: Int
+    ): [IssueCounts!]!
+}
+
+type Mutation{
+    setAboutMessage(message: String!): String
+    issueAdd(issue: IssueInputs!): Issue
+    issueUpdate(id: Int!, changes: IssueUpdateInputs!): Issue!
+    issueDelete(id: Int!): Boolean!
+    issueRestore(id: Int!): Boolean!
+}
