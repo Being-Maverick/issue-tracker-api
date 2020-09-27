@@ -8,5 +8,9 @@ To run this project on a your PC:
 2. Navigate to the folder api, in bash or cmd depending on your OS.
 3. Run npm install to install all the required dependencies.
 4. Set up MongoDB running on your machine at port 27017.
-4. Run "npm start" to start the backend server.
-5. Now, set up, your frontend UI by following the steps mentioned in issue-tracker-ui repository.
+5. Create a .env file and set the following constants in it:
+   a. DB_URL = Connection String to a running MongoDb instance.
+   b. PORT = 3000 or any other free port on your system.
+   c. UI_SERVER_ORIGIN = Url to the UI server.
+6. Run "npm start" to start the backend server.
+7. Now, set up, your frontend UI by following the steps mentioned in issue-tracker-ui repository.
